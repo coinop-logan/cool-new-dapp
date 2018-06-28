@@ -18,7 +18,15 @@
 
       web3.version.getNetwork(function(err, res) {
         if (!err) { // I skip this later in this file. This is bad! Bad Logan
-          $('#networkIDOutput').text(res);
+          if (res == 1) {
+            $('#networkIDOutput').text("main net");
+          }
+          else if (res == 3) {
+            $('#networkIDOutput').text("Ropsten");
+          }
+        }
+        else {
+          console.log(err);
         }
       });
 
@@ -46,7 +54,7 @@
     }
 
     function releaseDeposit() {
-      window.contractInstance.releaseDeposit({}, function(err, res) {
+      window.contractInstance.returnDeposit({}, function(err, res) {
         $('#transactions').html($('#transactions').html() + "release tx broadcasted: " + res + "<br>");
       });
     }
